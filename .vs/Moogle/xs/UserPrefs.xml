@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{8630EC0B-D076-40B2-B0D1-BF4324EC9991}|Default">
+  <MonoDevelop.Ide.ItemProperties.Algebra_220Library FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.MoogleServer PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MoogleEngine/Moogle.cs">
+    <Files>
+      <File FileName="MoogleEngine/Moogle.cs" Line="1" Column="1" />
+      <File FileName="MoogleLibrary/CosineSimilarityCalculator.cs" Line="328" Column="18" />
+      <File FileName="MoogleLibrary/Obteiner.cs" Line="1" Column="1" />
+      <File FileName="MoogleLibrary/Process.cs" Line="1" Column="1" />
+      <File FileName="MoogleLibrary/Matrix.cs" Line="1" Column="1" />
+      <File FileName="Algebra Library/AlgebraMatrix.cs" />
+      <File FileName="Algebra Library/AlgebraVector.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Moogle" expanded="True">
+            <Node name="MoogleEngine" expanded="True" />
+            <Node name="MoogleLibrary" expanded="True">
+              <Node name="Matrix.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>
