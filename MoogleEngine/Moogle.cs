@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 public static class Moogle
 {
+    //este metodo solamente busca un fragmento en cada texto por cada aparicion de cada palabra y devuelve un conjunto de fragmentos del texto
     public static string SnippetCalculator(string processQuery, string txt, int txtNumber)
     {
         string[] splitQuery = processQuery.Split(" ");
@@ -37,7 +38,7 @@ public static class Moogle
     }
 
     
-
+    //aqui mediante el obteiner se obtienen todos los datos necesarios y se pasan a ser procesados por el cosine similarity calculator , se optienen las puntuaciones de cada txt , se ordenan y se pasa obtener el snippet de cada uno
     public static SearchResult Query(string query,Obteiner obteiner) {
 
         obteiner.verifyFiles();
