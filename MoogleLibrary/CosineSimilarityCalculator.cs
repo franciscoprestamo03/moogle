@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace MoogleLibrary
 {
+	//Esta clase se encarga de ya teniendo el tfidf de los textos y el tfidf de los textos con palabras lematizadas y con el query saber la semejanza de este ultimo con cada documento
+	//Ademas de que aqui se procesan los operadores y se procesa el query
+	
 	public class CosineSimilarityCalculator
 	{
 		private Matrix Tfidf;
@@ -80,7 +83,7 @@ namespace MoogleLibrary
 			symbols();
 		}
 
-
+		//Este metodo se encarga de ir guardando en estructuras de datos las apariciones de cada simbolo para poder despues verificar el cumplimientos de estos en cada texto
 		private void calculateSymbols()
 		{
 			string[] wordsOfQuery = query.Split(" ");
@@ -148,7 +151,10 @@ namespace MoogleLibrary
 
             }
 		}
-
+		//Este metodo es el encargado de verificar el cumplimiento de cada operador
+		//para la distancia verifica linearmente la aparicion de alguna de las palabras que deben de estar cerca y luego sigue buscando si aparece la misma solo actualiza la posicion si aparece la otra palabra buscada calcula la distancia y va guardando la minima distancia y segun esta distancia de manera inversamente proporsional agrega una cantidad de puntos al score de los documentos
+		// para las palabaras de ! y ^ solo verifica que no aparezcan y aparezcan respectivamente
+		// y el operador * no se procesa aqui si no cuando se calcula el tfidf del query
 		private void symbols()
 		{
             foreach (var item in distanceToCalculate)
@@ -266,12 +272,13 @@ namespace MoogleLibrary
 
         }
 
-
+	//procesado de texto para quitar tbn simbolos como ! ^
         private string removePunctuations(string input)
 		{
 			return Regex.Replace(input.Normalize(NormalizationForm.FormD), @"[^a-z0-9 ]+", "");
 		}
 
+	//calcula la distancia de levinstein y se queda con la palabra mas semejante a las que aparecen en el diccionario de palabras y lo hace de manera iterativa como dinamic programing y no de manera recursiva
         private int LevenshteinDistance(string string1, string string2)
         {
             int n = string1.Length;
@@ -310,6 +317,7 @@ namespace MoogleLibrary
             return d[n, m];
         }
 
+	//cuenta las apariciones de cada palabra del query y de hecho crea un nuevo query el cual esta constituido por las palabras que mas cercanas son a las palabras del diccionario de palabras
         private void countOccurrences()
 		{
 
@@ -388,7 +396,8 @@ namespace MoogleLibrary
 			}
 		}
 
-
+		//calcula el tfidf del query y con palabras lematizadas tambien con la misma formula que para los documentos
+		//ademas se encarga de procesar el funcionamiento del operador *
 		private void calculateQueryTfidf()
 		{
             
@@ -446,7 +455,8 @@ namespace MoogleLibrary
 
 
 		}
-
+		//calcula la similaridad de los documentos con el query comparando cada uno de los vectores representados por el tfidf de cada txt con el del query y para ello se utiliza la similaridad de coseno
+		// el tfidf de palabras lematizadas , la similitud se divide entre 2 para que no influya tanto como el de las palabras sin lematizar y luego se suman los dos score
 		private void calculateSimilarity()
 		{
 
