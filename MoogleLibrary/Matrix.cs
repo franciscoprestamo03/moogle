@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace MoogleLibrary
 {
+	//Es una abstraccion de matrix solo que esta es un array de diccionarios por tanto indexa por entero y palabra lo cual es bastante util y eficiente
+	//Permite que si quieres obtener un valor en un indice y dicha palabra en dicho documento representado por un entero no existe devuelve 0
+	//Ademas contiene funciones para saber la cantidad de veces documentos que contienen a una palabra y otro par de metodos para serializarse y deserializarse automaticamente
 	public class Matrix
 	{
 		Dictionary<string, float>[] matrix;
