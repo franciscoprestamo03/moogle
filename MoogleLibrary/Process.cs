@@ -7,6 +7,11 @@ using MoogleLibrary;
 
 namespace MoogleLibrary
 {
+	//Esta clase se encarga de primeramente agregar en cada linea de cada texto al final agregar un espacio para evitar que las palabras al splitear los textos se junten
+	//Luego se encarga de procesar los textos convirtiendo a minusculas y quitando todo tipo de caracteres que no sean necesarios
+	//Ademas guarda en un archivo la ultima fecha de cambio de los archivos que procesa
+	//Guarda en una matrix las apariciones de cada palabra en cada texto y otra matrix para las palabras lematizadas de cada texto
+	
 	public class Process
 	{
         private string contentPath = Path.Join("..","Content");
@@ -44,7 +49,7 @@ namespace MoogleLibrary
 
             serialize();
         }
-
+	//metodo para agregar espacio al final de cada linea de cada texto
         public void addSpacesToAllTxt()
         {
             string inputFolder = contentPath;
@@ -86,7 +91,7 @@ namespace MoogleLibrary
                 }
             }
         }
-
+	//obtiene el texto de cada txt
         private void obteinAllTxt()
         {
             var txtDirs = Directory.EnumerateFiles(contentPathFinal, "*.txt");
@@ -111,7 +116,7 @@ namespace MoogleLibrary
                 
             }
         }
-
+	//procesa cada texto 
         private void processAllTxt()
         {
             foreach (var ptext in AllTxt)
@@ -148,7 +153,7 @@ namespace MoogleLibrary
                 }
             }
         }
-
+	// se encarga de guardar en json los datos para que la clase obteiner acceda a ellos en caso de que considere que necesitaba volver a cargar los documentos
         private void serialize()
         {
             string dir1 = Path.Join(jsonFilesPath,"fileNames.json");
