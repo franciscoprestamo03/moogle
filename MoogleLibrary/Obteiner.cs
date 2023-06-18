@@ -4,6 +4,10 @@ using System.Text.Json;
 
 namespace MoogleLibrary
 {
+	//Esta clase se encarga de obtener toda la informacion ya preprocesada y verificar si tiene que procesarse de nuevo
+	//Ademas calcula el tfidf de las palabras y el tfidf de las palabras lematizadas
+	//Ademas de obtener dicha informacion la almacena para pasarla a la clase query y solo procesar dicha informacion una vez
+	
 	public class Obteiner
 	{
         private string contentPath = Path.Join("..", "Content");
@@ -39,7 +43,7 @@ namespace MoogleLibrary
 
             verifyFiles();
         }
-
+	//este metodo se encarga de obtener la informacion almacenada en los json
         private void deserialize(bool processTfidf)
         {
             Console.WriteLine("se esta deserealizando");
@@ -95,7 +99,8 @@ namespace MoogleLibrary
             }
             
         }
-
+	//Este metodo se encarga de calcular el tfidf con la formula comun exceptuando que suma uno en la parte de cantidad de documentos para que el idf de una palabra que aparece muy repetida sea bajo pero no 0
+	//Ademas se almacena si una palabra ya fue calculada la cantidad de apariciones en tenxtos para no calcular de nuevo
         private void calculateTfidf()
         {
             idf = new();
@@ -129,7 +134,7 @@ namespace MoogleLibrary
             TfIdf.serialize(Path.Join(jsonFilesPath, "tfidf.json"));
 
             TfIdfSteamed = new(AllTxtProcessed.Count);
-
+		//calculo del tfidf para las palabras lematizadas
             for (int i = 0; i < AllTxtProcessed.Count; i++)
             {
                 float n = SteamedOccurrences.sumRow(i);
@@ -166,7 +171,7 @@ namespace MoogleLibrary
             File.WriteAllText(dir9, jsonString9);
 
         }
-
+	//verifica que esten los json
         public bool verifyJson()
         {
             bool a = true;
@@ -182,7 +187,7 @@ namespace MoogleLibrary
 
             return a; 
         }
-
+	//verifica las fechas de los archivos
         public void verifyFiles()
         {
             List<string> actualicedFilesNames = new();
