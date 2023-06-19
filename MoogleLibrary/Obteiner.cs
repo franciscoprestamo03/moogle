@@ -170,6 +170,42 @@ namespace MoogleLibrary
             string jsonString9 = JsonSerializer.Serialize(idfSteamed);
             File.WriteAllText(dir9, jsonString9);
 
+
+		//aaaaaaaaaa
+            float[] normaTfidf = new float[AllTxtProcessed.Count];
+
+            for (int i = 0; i < AllTxtProcessed.Count; i++)
+            {
+                foreach (var item in idf)
+                {
+                    string word = item.Key;
+                    normaTfidf[i] += TfIdf[i, word] * TfIdf[i, word];
+                }
+                normaTfidf[i] = (float) Math.Sqrt(normaTfidf[i]);
+            }
+
+            float[] normaSteamedTfidf = new float[AllTxtProcessed.Count];
+
+            for (int i = 0; i < AllTxtProcessed.Count; i++)
+            {
+                foreach (var item in idf)
+                {
+                    string word = item.Key;
+                    normaSteamedTfidf[i] += TfIdfSteamed[i, word] * TfIdfSteamed[i, word];
+                }
+                normaSteamedTfidf[i] = (float)Math.Sqrt(normaSteamedTfidf[i]);
+            }
+
+
+            string dir1 = Path.Join(jsonFilesPath, "normaTfidf.json");
+            string jsonStringFilesNames = JsonSerializer.Serialize(normaTfidf);
+            File.WriteAllText(dir1, jsonStringFilesNames);
+
+            string dir2 = Path.Join(jsonFilesPath, "normaSteamedTfidf.json");
+            string jsonStringFilesNames2 = JsonSerializer.Serialize(normaSteamedTfidf);
+            File.WriteAllText(dir2, jsonStringFilesNames2);
+            //aaaaaaaaaaaa
+
         }
 	//verifica que esten los json
         public bool verifyJson()
