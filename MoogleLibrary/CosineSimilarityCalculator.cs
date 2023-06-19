@@ -460,12 +460,23 @@ namespace MoogleLibrary
 		private void calculateSimilarity()
 		{
 
+		
+            string jsonFilesPath = Path.Join("..", "MoogleEngine", "jsonFiles");
+			string fileName1 = "normaTfidf.json";
+
+            string jsonString1 = File.ReadAllText(Path.Join(jsonFilesPath, fileName1));
+			float[] normaTfidf = JsonSerializer.Deserialize<float[]>(jsonString1)!;
+
+            string fileName2 = "normaSteamedTfidf.json";
+            string jsonString2 = File.ReadAllText(Path.Join(jsonFilesPath, fileName2));
+			float[]normaSteamedTfidf = JsonSerializer.Deserialize<float[]>(jsonString2)!;
+			
             for (int i = 0; i < numberDocuments; i++)   
 			{
 
                 float mult = 0;
                 float sum1 = 0;
-                float sum2 = 0;
+                float sum2 = normaTfidf[i];
 				float sum = 0;
 
                 foreach (var item in queryTfidf)
@@ -478,10 +489,10 @@ namespace MoogleLibrary
 
 					sum1 += queryTfidf[word] * queryTfidf[word];
 
-					sum2 += Tfidf[i, word] * Tfidf[i, word];
+		
                 }
 
-                sum = (float)(Math.Sqrt(sum1) * Math.Sqrt(sum2));
+                sum = (float)(Math.Sqrt(sum1) * sum2);
 
 				if (sum != 0)
 				{
@@ -494,7 +505,7 @@ namespace MoogleLibrary
 
                 float mult = 0;
                 float sum1 = 0;
-                float sum2 = 0;
+                float sum2 = normaSteamedTfidf[i];
                 float sum = 0;
 
                 foreach (var item in queryTfidfSteamed)
@@ -505,10 +516,10 @@ namespace MoogleLibrary
 
                     sum1 += queryTfidfSteamed[word] * queryTfidfSteamed[word];
 
-                    sum2 += TfidfSteamed[i, word] * TfidfSteamed[i, word];
+
                 }
 
-                sum = (float)(Math.Sqrt(sum1) * Math.Sqrt(sum2));
+                sum = (float)(Math.Sqrt(sum1) * sum2);
 
                 if (sum != 0)
                 {
