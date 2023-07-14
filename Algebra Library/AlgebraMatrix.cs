@@ -99,7 +99,7 @@ namespace Algebra_Library
 
         public static Vector operator *(Vector b,Matrix a)
         {
-            if (a.cols != b.Size)
+            if (a.cols != b.size)
             {
                 throw new ArgumentException("The number of columns in the matrix must be equal to the size of the vector.");
             }
