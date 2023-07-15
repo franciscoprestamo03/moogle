@@ -1,0 +1,65 @@
+\documentclass{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\title{Moogle: Advanced Document Search}
+\author{Francisco Prestamo}
+\date{2023}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Overview}
+\begin{itemize}
+\item Moogle can search within a group of .txt documents.
+\item It finds the documents most similar to a given query.
+\item Suggests alternatives if query words don't appear in the documents.
+\item Implements TF-IDF, Cosine Similarity, and Levenshtein Distance.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{TF-IDF}
+\begin{itemize}
+\item TF-IDF stands for Term Frequency-Inverse Document Frequency.
+\item It measures the importance of a word in a document within a corpus.
+\item The importance increases proportionally to the number of times a word appears in the document and is offset by the number of documents in the corpus that contain the word.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Cosine Similarity}
+\begin{itemize}
+\item Cosine similarity is a measure of similarity between two non-zero vectors.
+\item In Moogle, it is used to determine the similarity between the query and documents.
+\item It considers the cosine of the angle between two vectors, giving a measure that is not affected by the magnitude of the vectors.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Levenshtein Distance}
+\begin{itemize}
+\item Levenshtein Distance, or edit distance, is a string metric for measuring the difference between two sequences.
+\item Moogle utilizes this to suggest alternative queries if the original query words don't appear in the documents.
+\item This allows Moogle to handle typos and misspellings in the query.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item Moogle provides advanced search capabilities over a corpus of .txt documents.
+\item It uses TF-IDF, Cosine Similarity, and Levenshtein Distance to provide accurate results and helpful suggestions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Thank You!}
+\centering
+Questions?
+\end{frame}
+
+\end{document}
