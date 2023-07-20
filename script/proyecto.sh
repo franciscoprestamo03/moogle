@@ -23,10 +23,25 @@ function clean {
 
 function run_project {
     cd "../MoogleServer"
-    
-    dotnet run
-    
-    echo "Ejecutando el proyecto..."
+    dotnet build
+
+    dotnet run &
+    PID=$!
+    sleep 3
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        xdg-open http://localhost:5285
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        open http://localhost:5285
+    else
+        start http://localhost:5285
+    fi
+
+    echo "Presiona cualquier tecla para cerrar el programa..."
+    read -n 1 -s
+
+    kill $PID
+
 }
 
 function compile_report {
@@ -40,18 +55,28 @@ function compile_slides {
 }
 
 function show_report {
+
     cd "../informe"
     if [ ! -f "$REPORT_PDF" ]; then
         compile_report
     fi
     
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        open $REPORT_PDF
-    elif [[ "$OSTYPE" == "msys" ]]; then
-        start $REPORT_PDF
+    if [[ "$1" == "-v" ]]; then
+        if [[ ! "$2" == "" ]]; then
+            echo "Usando visualizador alternativo $2"
+            $2 $REPORT_PDF
+        else
+            echo "Opcion de parametro -v no valida"
+        fi
     else
-        xdg-open $REPORT_PDF
-        exit 1
+  
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            xdg-open $REPORT_PDF
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+            open $REPORT_PDF
+        else
+            start $REPORT_PDF
+        fi
     fi
 }
 
@@ -61,13 +86,22 @@ function show_slides {
         compile_slides
     fi
     
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        open $SLIDES_PDF
-    elif [[ "$OSTYPE" == "msys" ]]; then
-        start $SLIDES_PDF
+    if [[ "$1" == "-v" ]]; then
+        if [[ ! "$2" == "" ]]; then
+            echo "Usando visualizador alternativo $2"
+            $2 $SLIDES_PDF
+        else
+            echo "Opcion de parametro -v no valida"
+        fi
     else
-        xdg-open $SLIDES_PDF
-        exit 1
+  
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            xdg-open $SLIDES_PDF
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+            open $SLIDES_PDF
+        else
+            start $SLIDES_PDF
+        fi
     fi
 }
 
@@ -85,13 +119,13 @@ case $1 in
         compile_slides
         ;;
     show_report)
-        show_report $2
+        show_report $2 $3
         ;;
     show_slides)
-        show_slides $2
+        show_slides $2 $3
         ;;
     *)
-        echo "Uso: $0 {run|clean|report|slides|show_report|show_slides}"
+        echo "Uso: $0 {run|clean|report|slides|show_report|show_report -v option |show_slides|show_slides -v option|}"
         exit 1
 esac
 
