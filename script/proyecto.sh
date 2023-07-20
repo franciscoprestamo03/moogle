@@ -22,7 +22,20 @@ function clean {
 
 function run_project {
     cd "../MoogleServer"
-    dotnet run
+    
+    dotnet build
+    dotnet run &
+    sleep 2
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        open "http://localhost:5285"
+    elif [[ "$OSTYPE" == "msys" ]]; then
+        start "http://localhost:5285"
+    else
+        xdg-open "http://localhost:5285"
+        exit 1
+    fi
+    
     echo "Ejecutando el proyecto..."
 }
 
