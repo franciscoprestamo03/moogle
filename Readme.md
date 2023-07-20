@@ -10,7 +10,5 @@ You have the ability to remove, add and edit documents while the project is runn
 The search engine is able to suggest and search with the words most similar to the text you write since it is possible that the words you write contain misspellings.
 
 
-Check that the project does not contain files of type ._*# project
-
 .Net V6.0
 
