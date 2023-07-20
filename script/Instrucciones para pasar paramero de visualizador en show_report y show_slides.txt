@@ -1,0 +1,3 @@
+Para usar una herramienta de visualización especifica utilice -v en show_report and show_slides
+Ejemplo:
+bash proyecto.sh show_report -v open
