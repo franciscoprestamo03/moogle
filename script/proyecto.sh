@@ -6,20 +6,23 @@ SLIDES_TEX="Moogle-latex-presentation.tex" # Archivo tex de las diapositivas
 REPORT_PDF="Moogle-latex.pdf" # Archivo pdf del informe
 SLIDES_PDF="Moogle-latex-presentation.pdf" # Archivo pdf de las diapositivas
 
-
-
+# La carpeta contentWithSpaces y los json creados por mi para guardar objetos de mi proyecto no son eliminados pues forman parte del proyecto en si.
 function clean {
     cd  "../informe"
     rm -f *.log *.aux *.out
     cd "../presentacion"
     rm -f *.log *.aux *.out *.toc *.snm *.nav
     
-    
+    cd ".."
+    find . -type d -name bin -exec rm -rf {} +
+    find . -type d -name obj -exec rm -rf {} +
+
+    echo "Proyecto limpiado."
 }
 
 function run_project {
-    cd ".."
-    
+    cd "../MoogleServer"
+    dotnet run
     echo "Ejecutando el proyecto..."
 }
 
@@ -44,7 +47,7 @@ function show_report {
     elif [[ "$OSTYPE" == "msys" ]]; then
         start $REPORT_PDF
     else
-        echo "Unsupported operating system: $OSTYPE"
+        xdg-open $REPORT_PDF
         exit 1
     fi
 }
@@ -60,7 +63,7 @@ function show_slides {
     elif [[ "$OSTYPE" == "msys" ]]; then
         start $SLIDES_PDF
     else
-        echo "Unsupported operating system: $OSTYPE"
+        xdg-open $SLIDES_PDF
         exit 1
     fi
 }
