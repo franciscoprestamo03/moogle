@@ -22,25 +22,9 @@ function clean {
 }
 
 function run_project {
-    cd "../MoogleServer"
-    dotnet build
-
-    dotnet run &
-    PID=$!
-    sleep 3
-
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        xdg-open http://localhost:5285
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        open http://localhost:5285
-    else
-        start http://localhost:5285
-    fi
-
-    echo "Presiona cualquier tecla para cerrar el programa..."
-    read -n 1 -s
-
-    kill $PID
+    cd ".."
+    
+    make dev
 
 }
 
