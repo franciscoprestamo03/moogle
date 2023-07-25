@@ -9,9 +9,9 @@ SLIDES_PDF="Moogle-latex-presentation.pdf" # Archivo pdf de las diapositivas
 # La carpeta contentWithSpaces y los json creados por mi para guardar objetos de mi proyecto no son eliminados pues forman parte del proyecto en si.
 function clean {
     cd  "../informe"
-    rm -f *.log *.aux *.out
+    rm -f *.log *.aux *.out *.pdf
     cd "../presentacion"
-    rm -f *.log *.aux *.out *.toc *.snm *.nav
+    rm -f *.log *.aux *.out *.toc *.snm *.nav *.pdf
     
     cd ".."
     find . -type d -name bin -exec rm -rf {} +
